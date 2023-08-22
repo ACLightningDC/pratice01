@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+//체크하면 쿠키객체 생성
+function setCookie(name, value, expiredays) {//expiredays에 1(=하루) 전달하면 쿠키여영역에 하루동안 보존된다
+	alert("작동set");
+	var date = new Date();//지그만ㄹ짜를 now에 저장 후 (예) 2023년8월 17일 GMT+0900 (한국표준시)
+	
+	alert("작동set 1 ");
+	date.setDate(date.getDate() + expiredays);//쿠키 만료일자 : 현재날짜 + 1(=하루)
+	
+	//now.setMonth(date.getMonth() +1);//쿠키 만료일자 : 현재달 + 1 달로 + 1(1달)
+	//now.setMonth(date.getMonth() -1);//쿠키 제거시 삭제하는 것이 아니라 만료일자를 과거일자로 세팅하는 것 : 만료일자 지금달 - 1(1달)
+	
+	//쿠키의 생성 :value와 name 에 encodeURIcomponet 하는 것은 한글 때문이다 encodeURIComponent	
+	//쿠키의 name , value엔 특별한 제약이 없기 때문에 모든 글자가 허용된다.
+	//하지만 형식의 유효성을 일관성있게 유지하기 위해서 encodeURIComponent을 사용(예)my name => my%20name
+	//path=/ 루트를 기준 기본 모든 기간에 가능 - 적으면 
+	alert("작동set 2 ");
+	document.cookie = encodeURIComponent(name)+ "=" + encodeURIComponent(value) + "; path=/; expires="  + date.toUTCString();//쿠키만료시간을 UTC형식으로 시간 값을 바꾸어 저장하기 위함
+	alert("작동set 3 ");
+	//1시간 뒤에 쿠키가 삭제됨 name과 value가 영어/특수문자/숫자는 어떤 문자셋을 써도 무방하므로 encodeURIComponent()사용안해도됨
+	document.cookie = "popupYN=Y; max-age=3600";//name과 value가 영어/특수문자/숫자는 어떤 문자셋을 써도 무방하므로
+	document.cookie = "popupYN=Y; max-age=3600";//1시간 뒤에 쿠키가 삭제됨
+	alert("작동set 4 ");
+	//document.cookie = "user=kang"
+	document.cookie = "user=kang; max-age=0"; //쿠키제거
+	alert("작동set 5 ");
+
+	alert(document.cookie);
+	
+}
+
+function closePopup(){
+	alert("작동");
+	if(document.getElementById("check").value){ //check되어 있으면 true
+		alert("작동");
+	 setCookie("popupYN","N",1);	
+		alert("작동");
+	self.close();
+	opener.location.href="menu.kiosk"
+	}
+}
+function moveClose(){
+	opener.location.href="menu.kiosk"; //사용자 모드:'주문하기' 요청하면
+	self.close();
+}
+</script>
+</head>
+<body>
+	알림 팝업창입니다.
+	<p>
+	
+	<form>
+	<input type="checkbox" id="check" onclick="closePopup();"/>		오늘 하루 더 이상 팝업팡 띄우지 않기
+	
+	<input type="button" value="닫기" onclick="self.close();"/>
+	
+	<br>
+	
+	<input type="button" value="[주문하기]로 이동후 닫기" onclick="moveClose();"/>
+	</form>
+</body>
+</html>
+
