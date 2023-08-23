@@ -85,7 +85,7 @@ ul , li{
 				<ul>
 					<a href="<%=request.getContextPath() %>/userLogin.usr">로그인</a>
 					|
-					<a href="<%=request.getContextPath() %>/userJoin.usr">회원가입</a>
+					<a href="<%=request.getContextPath() %>/userJoin.jsp">회원가입</a>
 				</ul>
 				</c:when>
 				<c:otherwise>

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<input name="idck" value=>
+<form action="idck.usr" method="post">
+	아이디 중복 확인 <input name="idck" value=""><input type="submit" value="아이디 확인">
+</form>
+ 
 </body>
 </html>

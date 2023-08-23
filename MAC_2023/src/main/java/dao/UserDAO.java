@@ -336,8 +336,36 @@ public class UserDAO {
 					}
 
 					public boolean userUpdate() {
-						// TODO 자동 생성된 메소드 스텁
+						
+						
 						return false;
+					}
+
+					public boolean IdCheck(String ck_id) {
+						System.out.println("DAO IdCheck 확인");
+						boolean IdCheck = false;
+						
+						String sql=" select id from member_table where id = ?";
+						try {
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, ck_id);
+							
+							rs= pstmt.executeQuery();
+							if(rs.next()) {
+								if(rs.getString("id").equals(ck_id)) {
+									IdCheck = true;
+								}
+							}
+						}catch(Exception e){
+							System.out.println("[DAO] IdCheck 에러"+e);
+						}finally {
+							close(pstmt);
+							close(rs);
+						}
+					
+						
+						return IdCheck;
 					}
 
 

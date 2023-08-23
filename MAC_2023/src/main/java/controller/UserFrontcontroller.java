@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.user.UserLoginAction;
+import action.user.idCheckAction;
 import action.user.userJoinAction;
 import action.user.userLogoutAction;
 import action.user.userUpdateAction;
@@ -132,6 +133,16 @@ public class UserFrontcontroller extends HttpServlet {
 		else if(command.equals("/userUpdate.usr")) {//로그인 폼 보기 요청하면 
 			//부모 인터페이스 = 구현한 자식 객체
 			action = new userUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+		else if(command.equals("/idCheck/idck.usr")) {//로그인 폼 보기 요청하면 
+			//부모 인터페이스 = 구현한 자식 객체
+			action = new idCheckAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

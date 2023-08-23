@@ -4,8 +4,8 @@ create table member_table(
 id varchar(45) primary key,
 grade Nvarchar(10) not null,
 password varchar(256) not null,/*암호화된 비밀번호 저장위해*/
-//password varchar(256) not null,/*암호화된 비밀번호 저장위해 : 비밀번호 찾기(복호화 안되므로 '이메일'임시 비밀번호)*/
-//SHA256password varchar(256) not null,/*암호화된 비밀번호 저장위해 : 비밀번호 찾기(복호화 안되므로 '이메일'임시 비밀번호)*/
+/*password varchar(256) not null,*//*암호화된 비밀번호 저장위해 : 비밀번호 찾기(복호화 안되므로 '이메일'임시 비밀번호)*/
+/*SHA256password varchar(256) not null,*//*암호화된 비밀번호 저장위해 : 비밀번호 찾기(복호화 안되므로 '이메일'임시 비밀번호)*/
 name Nvarchar(20) not null,
 email varchar(45) not null,
 phone varchar(11) not null,/*11바이트 : 01012345678, 13바이트 010-1234-5678*/
