@@ -22,34 +22,29 @@ public class idCheckAction implements Action {
 		
 		
 		System.out.println(isIdCheck +" idCheckAction isIdCheck 확인");
+		response.setContentType("text/html;charset=utf-8"); 
+		PrintWriter out= response.getWriter();
 		
 		if(isIdCheck) {
-			response.setContentType("text/html;charset=utf-8"); 
 
 			System.out.println("true 실행");
 
-			PrintWriter out= response.getWriter();
-
-			out.println("<script>");
+			out.println("<script type='text/javascript'>");
+			out.println("alert('아이디 확인');");
 			out.println("opener.document.getElementById('id').value = ck_id; ");
 			out.println("self.close();");
 			out.println("</script>");
 			
 		}else {
-			response.setContentType("text/html;charset=utf-8"); 
-
-			
-			PrintWriter out= response.getWriter();
 
 			System.out.println("else 실행");
 			
-			out.println("<script>");
-			out.println("alert('중복된 아이디입니다..');");
+			out.println("<script type='text/javascript'>");
+			out.println("alert('중복된 아이디입니다.');");
 			out.println("</script>");
 		}
 		
 		System.out.println("idCheckAction 실행");
-
 		
 		forward = new ActionForward("../userJoin.jsp",false);
 		return forward;

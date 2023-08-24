@@ -13,26 +13,28 @@ public class UserViewService {
 	public MemberBean getUserInfo(String u_id) {
 		
 		Connection con = getConnection();
-		
-		MemberBean memberbean= null;
-		
 		UserDAO dao = UserDAO.getInstance();
+		
+		dao.setConnection(con);
+
+		
 		
 		MemberBean userInfo = dao.getUserInfo(u_id);
 		
-		return null;
+		return userInfo;
 	}
 
 	public AddressBean getAddressinfo(String u_id) {
 		Connection con = getConnection();
-		
-		MemberBean memberbean= null;
-		
 		UserDAO dao = UserDAO.getInstance();
+		
+		dao.setConnection(con);
+
+		
 		
 		AddressBean userInfo = dao.getAddressInfo(u_id);
 		
-		return null;
+		return userInfo;
 	}
 	 
 }

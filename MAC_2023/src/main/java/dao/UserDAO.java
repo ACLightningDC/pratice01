@@ -83,15 +83,22 @@ public class UserDAO {
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, u_id);
+				
+				
 				rs= pstmt.executeQuery();
 				
 				userInfo = new MemberBean();//기본값을
 				
-				userInfo.setId(rs.getString("id"));
-				userInfo.setGrade(rs.getString("grade"));
-				userInfo.setName(rs.getString("name"));
-				userInfo.setEmail(rs.getString("email"));
-				userInfo.setPhone(rs.getString("phone"));
+				if(rs.next()) {
+					
+					userInfo.setId(rs.getString("id"));
+					userInfo.setGrade(rs.getString("grade"));
+					userInfo.setName(rs.getString("name"));
+					userInfo.setEmail(rs.getString("email"));
+					userInfo.setPhone(rs.getString("phone"));
+				}
+				
+				
 				
 			}catch(Exception e){
 				System.out.println("selectUserInfo 에러 : " + e );
@@ -278,13 +285,18 @@ public class UserDAO {
 
 					public MemberBean getUserInfo(String u_id) {
 						MemberBean memberinfo = null;
-						
-						String sql ="select * from member_table where id = ? ";
+						System.out.println("getUserInfo 작동");
+
+						String sql =" select * from member_table where id = ? ";
 								try {
 									pstmt = con.prepareStatement(sql);
+									System.out.println("getUserInfo stmt 연결");
+
+
 									pstmt.setString(1, u_id);
-									
+
 									rs = pstmt.executeQuery();
+									
 									if(rs.next()) {
 										memberinfo = new MemberBean();
 										memberinfo.setId(rs.getString("id"));
@@ -293,9 +305,9 @@ public class UserDAO {
 										memberinfo.setName(rs.getString("name"));
 										memberinfo.setEmail(rs.getString("email"));
 										memberinfo.setPhone(rs.getString("email"));
-										memberinfo.setJoindate(rs.getString("joindate"));
-									
+										memberinfo.setJoindate(rs.getString("joindate"));										
 									}
+									System.out.println(memberinfo.toString());
 										
 								}catch(Exception e) {
 									System.out.println("[DAO] getUserInfo 에러" + e);
@@ -335,11 +347,6 @@ public class UserDAO {
 						return addr;
 					}
 
-					public boolean userUpdate() {
-						
-						
-						return false;
-					}
 
 					public boolean IdCheck(String ck_id) {
 						System.out.println("DAO IdCheck 확인");
@@ -368,5 +375,131 @@ public class UserDAO {
 						return IdCheck;
 					}
 
+
+					public int userUpdate(MemberBean user) {
+						int UpdateCheck = 0;
+						
+						String sql=" update member_table set name= ?, email= ?, phone= ? where id = ?  ";
+						try {
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, user.getName());
+							pstmt.setString(2, user.getEmail());
+							pstmt.setString(3, user.getPhone());
+							pstmt.setString(4, user.getId());
+							
+							UpdateCheck = pstmt.executeUpdate();
+							
+						}catch(Exception e){
+							System.out.println("[DAO] userupdate 에러"+e);
+						}finally {
+							close(pstmt);
+						}
+						
+						
+						return UpdateCheck;					
+					}
+
+					public int addrUpdate(AddressBean addr) {
+							int UpdateCheck = 0;
+						
+						String sql=" update address_table set postcode = ? , address1 = ?, address2=? where id = ?  ";
+						try {
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setInt(1, addr.getPostcode());
+							pstmt.setString(2, addr.getAddress1());
+							pstmt.setString(3, addr.getAddress2());
+							pstmt.setString(4, addr.getId());
+							
+							UpdateCheck = pstmt.executeUpdate();
+							
+						}catch(Exception e){
+							System.out.println("[DAO] addrupdate 에러"+e);
+						}finally {
+							close(pstmt);
+						}
+						
+						
+						return UpdateCheck;		
+					}
+
+					public int UserDelete(String id) {
+						int deleteCheck = 0;
+						
+					String sql=" delete from member_table where id =? ";
+					try {
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setString(1,id);
+						
+						deleteCheck = pstmt.executeUpdate();
+						
+					}catch(Exception e){
+						System.out.println("[DAO] UserDelete 에러"+e);
+					}finally {
+						close(pstmt);
+					}
+					
+					System.out.println("UserDelete 실행");
+					System.out.println("UserDelete 실행 값"+deleteCheck);
+					return deleteCheck;							
+					}
+
+					public int addrDelete(String id) {
+						System.out.println("addrDelete id 값"+id);
+
+						int deleteCheck = 0;
+						
+					String sql=" delete from address_table where id = ? ";
+					try {
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setString(1,id);
+						
+						deleteCheck = pstmt.executeUpdate();
+						
+					}catch(Exception e){
+						System.out.println("[DAO] AddressDelete 에러"+e);
+					}finally {
+						close(pstmt);
+					}
+					
+					System.out.println("addrDelete 실행 값"+deleteCheck);
+					return deleteCheck;	
+					}
+
+					public MemberBean findId(String u_email) {
+						MemberBean memberinfo= null;
+						String sql =" select id from member_table where email = ?";
+						try {
+							pstmt= con.prepareStatement(sql);
+							
+							pstmt.setString(1, u_email);
+							rs = pstmt.executeQuery();
+							
+							if(rs.next()) {
+								memberinfo = new MemberBean();
+								memberinfo.setId(rs.getString("id"));
+							}
+						}catch(Exception e) {
+							System.out.println("findId 에러 "+e);
+						}finally {
+							close(rs);
+							close(pstmt);
+						}
+						
+						return memberinfo;
+					}
+
+
+					public int UserRandomPasswordUpdate(String random_Password, String id, String email) {
+						int Check= 0;
+						
+						String sql ="update member_table password = ? where id = ? and email = ?";
+						
+						
+						return Check;
+					}
 
 }

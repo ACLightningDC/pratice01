@@ -5,20 +5,23 @@ import static db.JdbcUtil.getConnection;
 import java.sql.Connection;
 
 import dao.UserDAO;
+import vo.MemberBean;
 
-public class userUpdateService {
+public class UserIdFindService {
 
-	public static boolean userUpdate() {
+
+	public MemberBean findId(String u_email) {
 		
 		Connection con = getConnection();
-		
 		UserDAO dao = UserDAO.getInstance();
 		
 		dao.setConnection(con);
+
 		
-		boolean updatecheck = dao.userUpdate();
-		return false;
+		
+		MemberBean userInfo= dao.findId(u_email);
+		
+		return userInfo;
 	}
 
-	
 }

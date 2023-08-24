@@ -43,3 +43,6 @@ insert into address_table values();
 select * from address_table where id = ?;
 
 select * from member_table;
+update member_table set name= ? email= ? phone= ? where id = ? ;
+update address_table set postcode = ? address1 = ? address2=? where id = ?
+delete from member_table where id =?

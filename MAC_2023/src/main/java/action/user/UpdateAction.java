@@ -4,21 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import svc.user.userUpdateService;
 import vo.ActionForward;
 
-public class userUpdateAction implements Action {
+public class UpdateAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		request.getAttribute("");
-		
-		
-		
-		userUpdateService useupdateservice = new userUpdateService();
-		boolean userupdate = userUpdateService.userUpdate();
-		
+		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 

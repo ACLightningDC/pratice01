@@ -2,6 +2,7 @@ package action.user;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -64,6 +65,20 @@ public class userJoinAction implements Action {
 //			out.println("alert('회원가입 성공')");
 //			out.println("location.href='userLogin.usr'");
 //			out.println("</script>");
+			String cookie = request.getHeader("Cookie");
+			if(cookie!=null) {
+				Cookie[] cookies =request.getCookies();
+				for(int i =0 ; i < cookies.length ; i++) {
+					String cookieName = cookies[i].getName();
+					
+					if(cookieName.equals("u_id")) {
+						cookies[i].setMaxAge(0);
+					}
+					if(cookieName.equals("checkbox")){
+						cookies[i].setMaxAge(0);
+					}
+				}
+			}
 			
 			forward = new ActionForward("userLogin.usr", true);
 		}

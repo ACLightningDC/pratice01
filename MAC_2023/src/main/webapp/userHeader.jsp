@@ -83,19 +83,19 @@ ul , li{
 			<c:choose>
 				<c:when test="${sessionScope.u_id eq null }">
 				<ul>
-					<a href="<%=request.getContextPath() %>/userLogin.usr">로그인</a>
+					<a href="userLogin.usr">로그인</a>
 					|
-					<a href="<%=request.getContextPath() %>/userJoin.jsp">회원가입</a>
+					<a href="userJoin.jsp">회원가입</a>
 				</ul>
 				</c:when>
 				<c:otherwise>
 				<ul>
 					${sessionScope.u_name}님 환영합니다.<br>
-					<a href="<%=request.getContextPath() %>/userLogout.usr">로그 아웃</a>
+					<a href="userLogout.usr">로그 아웃</a>
 					|
-					<a href="<%=request.getContextPath() %>/myOrder.kiosk">주문내역보기</a>
+					<a href="myOrder.kiosk">주문내역보기</a>
 					|
-					<a href="<%=request.getContextPath() %>/userView.usr">회원정보관리</a>
+					<a href="userView.usr">회원정보관리</a>
 					|
 					<a href="<%=request.getContextPath() %>/userLogout.usr">고객문의</a>
 				</ul>

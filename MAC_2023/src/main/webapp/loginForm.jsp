@@ -66,7 +66,7 @@ if(cookies !=null&& cookies.length > 0){
 			<tr>
 				<th>아이디</th>
 				<td>
-				<input type="text" name="id" size="30" <%=id!=null?"value="+id:""%> placeholder="아이디입력(필수)"/>
+				<input type="text" name="id" size="30" value="${cookie.u_id.value}" placeholder="아이디입력(필수)"/>
 				</td>
 			</tr>
 			<tr>
@@ -86,16 +86,13 @@ if(cookies !=null&& cookies.length > 0){
 			<tr>
 			<th colspan="2">
 				<a href="userIdFindForm.usr">[아이디 찾기]</a>
-				<a href="userPwFindForm.usr">[아이디 찾기]</a>
+				<a href="userPwFindForm.usr">[비밀번호 찾기]</a>
 				<a href="userHashPwFindForm.usr">[암호화된 비밀번호 찾기]</a>
 				</th>
 			</tr>
 
 		</table>
-		아이디 : <input type="text" name="id" size="20" <%=id!=null?"value="+id:""%> placeholder="아이디입력(필수)"/> <br>
-		비밀번호 : <input type="password" name="pw" size="20" placeholder="비밀번호입력(필수)"/> <br>
-		아이디 저장 : <input type="checkbox" name="checkbox" <%=id!=null?"checked='checke'":""%>/> <br>
-	<input type="submit" value="로그인"/> <br>		
+		
 	</form>
 </body>
 </html>

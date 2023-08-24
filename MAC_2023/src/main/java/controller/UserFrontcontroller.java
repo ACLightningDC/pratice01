@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.user.UpdateAction;
+import action.user.UserDeleteAction;
 import action.user.UserLoginAction;
 import action.user.idCheckAction;
+import action.user.userHashPwFindAction;
+import action.user.userIDFindAction;
 import action.user.userJoinAction;
 import action.user.userLogoutAction;
-import action.user.userUpdateAction;
+import action.user.UserUpdateAction;
 import action.user.userViewAction;
 import vo.ActionForward;
 
@@ -49,7 +53,7 @@ public class UserFrontcontroller extends HttpServlet {
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setContentType("text/html; charset=utf-8"); 
 		request.setCharacterEncoding("utf-8");//반드시 첫줄 (post방식)
 		/**
 		 * 1. 전송된 요청 파악
@@ -79,7 +83,7 @@ public class UserFrontcontroller extends HttpServlet {
 		}
 		/*------------'로그인 폼 보기'------------------------------------------------------------------------*/
 		else if(command.equals("/userLogin.usr")) {//로그인 폼 보기 요청하면 
-			request.setAttribute("showPage", "user/loginForm.jsp");
+			request.setAttribute("showPage", "loginForm.jsp");
 			forward = new ActionForward("userTemplate.jsp",false);//반드시 디스패치 방식으로 
 		}
 		else if(command.equals("/userLoginAction.usr")) {//로그인 폼 보기 요청하면 
@@ -132,7 +136,17 @@ public class UserFrontcontroller extends HttpServlet {
 		}
 		else if(command.equals("/userUpdate.usr")) {//로그인 폼 보기 요청하면 
 			//부모 인터페이스 = 구현한 자식 객체
-			action = new userUpdateAction();
+			action = new UserUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+		else if(command.equals("/userDelete.usr")) {//로그인 폼 보기 요청하면 
+			//부모 인터페이스 = 구현한 자식 객체
+			action = new UserDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -150,6 +164,38 @@ public class UserFrontcontroller extends HttpServlet {
 				
 			}
 		}
+		else if(command.equals("/userIdFindForm.usr")) {//로그인 폼 보기 요청하면 
+			request.setAttribute("showPage", "user/userIdFoundForm.jsp");
+				forward = new ActionForward("userTemplate.jsp" ,false);
+		}
+		else if(command.equals("/userIdFindAction.usr")) {//로그인 폼 보기 요청하면 
+			//부모 인터페이스 = 구현한 자식 객체
+			System.out.println("실행");
+			action = new userIDFindAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+		else if(command.equals("/userHashPwFindForm.usr")) {//로그인 폼 보기 요청하면 
+			request.setAttribute("showPage", "user/hash/userHashPwFindForm.jsp");
+				forward = new ActionForward("userTemplate.jsp" ,false);
+		}
+		else if(command.equals("/userHashPwFindAction.usr")) {//비밀번호 찾기 폼 요청하면 
+			//부모 인터페이스 = 구현한 자식 객체
+			System.out.println("실행");
+			action = new userHashPwFindAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+	
+		
 		
 		
 		

@@ -39,6 +39,14 @@ public class AddressBean {
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
+
+	@Override
+	public String toString() {
+		return "AddressBean [id=" + id + ", postcode=" + postcode + ", address1=" + address1 + ", address2=" + address2
+				+ "]";
+	}
+	
+	
 	
 	
 }

@@ -23,6 +23,8 @@ public class userViewAction implements Action {
 		
 		String u_id = (String) session.getAttribute("u_id");
 		
+		System.out.println(u_id+"id 세션값");
+		
 		if(u_id == null) {//로그인 상태가 아니면
 			PrintWriter out= response.getWriter();
 			out.println("<script>");
@@ -39,7 +41,7 @@ public class userViewAction implements Action {
 					
 				request.setAttribute("user",userInfo );
 				request.setAttribute("addr",userAddrInfo );
-				request.setAttribute("showPage", "user/userView.jsp");
+				request.setAttribute("showPage", "userView.jsp");
 			
 			forward = new ActionForward("userTemplate.jsp", false);//반드시 디스패치 방식으로 표시
 		}
