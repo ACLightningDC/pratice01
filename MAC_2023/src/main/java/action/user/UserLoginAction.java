@@ -65,22 +65,27 @@ public class UserLoginAction implements Action {
 			 * u_id, u_password, U_grade, u_name, u_email
 			 */
 			
-			HttpSession session =  request.getSession(); 
-			session.setAttribute("u_id", u_id);
+
+				HttpSession session =  request.getSession(); 
+				session.setAttribute("u_id", u_id);
+				
+				session.setAttribute("u_password", userInfo.getPassword());
+				
+				//등급 필요한 이유? 구매할 때 등급으로 세일비율을 얻어올 수 있으므로(예)NORMAL:0, GOLD:0.05 VIP 0.1
+				session.setAttribute("u_grade",userInfo.getGrade());
+				
+				session.setAttribute("u_name", userInfo.getName());
+				session.setAttribute("u_email",userInfo.getEmail());
+				
+				session.setMaxInactiveInterval(1*60*60);//세션 유지시간을 1시간(=3600초 )으로 설정
+				
+			if(!userInfo.getTemporary_password().equalsIgnoreCase("NO")) {
+					forward = new ActionForward("userHashPwChangeForm.jsp",true);
+			}	
+			else forward = new ActionForward("userMain.jsp",true);
+			}
 			
-			session.setAttribute("u_password", userInfo.getPassword());
-			
-			//등급 필요한 이유? 구매할 때 등급으로 세일비율을 얻어올 수 있으므로(예)NORMAL:0, GOLD:0.05 VIP 0.1
-			session.setAttribute("u_grade",userInfo.getGrade());
-			
-			session.setAttribute("u_name", userInfo.getName());
-			session.setAttribute("u_email",userInfo.getEmail());
-			
-			session.setMaxInactiveInterval(1*60*60);//세션 유지시간을 1시간(=3600초 )으로 설정
-			
-			
-			forward = new ActionForward("userMain.jsp",true);
-		}
+		
 		
 		
 		return forward;

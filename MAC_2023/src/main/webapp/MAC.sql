@@ -9,6 +9,7 @@ password varchar(256) not null,/*암호화된 비밀번호 저장위해*/
 name Nvarchar(20) not null,
 email varchar(45) not null,
 phone varchar(11) not null,/*11바이트 : 01012345678, 13바이트 010-1234-5678*/
+temporary_password varchar(10) default 'NO',
 joindate timestamp default now()/*timestamp(같은지역은 같은시간대 사용위해) , now() : 오라클의 sysdate와 같다.*/ 
 );
 

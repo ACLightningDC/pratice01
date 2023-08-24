@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>
-				아이디 입력
+				이메일 입력
 			</td>
 			<td>
 				<input type="text" name="email" >

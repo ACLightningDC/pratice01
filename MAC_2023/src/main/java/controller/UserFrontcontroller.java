@@ -13,6 +13,7 @@ import action.user.UpdateAction;
 import action.user.UserDeleteAction;
 import action.user.UserLoginAction;
 import action.user.idCheckAction;
+import action.user.UserHashPwChangeAction;
 import action.user.userHashPwFindAction;
 import action.user.userIDFindAction;
 import action.user.userJoinAction;
@@ -187,6 +188,21 @@ public class UserFrontcontroller extends HttpServlet {
 			//부모 인터페이스 = 구현한 자식 객체
 			System.out.println("실행");
 			action = new userHashPwFindAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+		else if(command.equals("/userHashPwChangeForm.usr")) {//비밀번호 찾기 폼 요청하면 
+			request.setAttribute("showPage", "user/hash/userHashPwChangeForm.jsp");
+			forward = new ActionForward("userTemplate.jsp" ,false);
+			}
+		else if(command.equals("/userHashPwChangeAction.usr")) {//비밀번호 찾기 폼 요청하면 
+			//부모 인터페이스 = 구현한 자식 객체
+			System.out.println("실행");
+			action = new UserHashPwChangeAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

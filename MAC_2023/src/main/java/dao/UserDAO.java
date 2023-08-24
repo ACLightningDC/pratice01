@@ -96,6 +96,7 @@ public class UserDAO {
 					userInfo.setName(rs.getString("name"));
 					userInfo.setEmail(rs.getString("email"));
 					userInfo.setPhone(rs.getString("phone"));
+					userInfo.setTemporary_password(rs.getString("temporary_password"));
 				}
 				
 				
@@ -496,9 +497,43 @@ public class UserDAO {
 					public int UserRandomPasswordUpdate(String random_Password, String id, String email) {
 						int Check= 0;
 						
-						String sql ="update member_table password = ? where id = ? and email = ?";
+						String sql ="update member_table password = ? temporary_password = ? where id = ? and email = ?";
+						try {
+							pstmt= con.prepareStatement(sql);
+							
+							pstmt.setString(1, random_Password);
+							pstmt.setString(2, "YES");
+							pstmt.setString(3, id);
+							pstmt.setString(4, email);
+							Check = pstmt.executeUpdate();
+							
+						}catch(Exception e) {
+							System.out.println("UserRandomPasswordUpdate 에러 "+e);
+						}finally {
+							close(pstmt);
+						}
+						return Check;
+					}
+
+					public int UserHashPwChange(String id , String temporary_password ,String password) {
+int Check= 0;
 						
-						
+						String sql ="update member_table password = ? temporary_password = ? where id = ? and password = ?";
+						try {
+							pstmt= con.prepareStatement(sql);
+							
+							pstmt.setString(1, password);
+							pstmt.setString(2, "NO");
+							pstmt.setString(3, id);
+							pstmt.setString(3, temporary_password);
+
+							Check = pstmt.executeUpdate();
+							
+						}catch(Exception e) {
+							System.out.println("UserRandomPasswordUpdate 에러 "+e);
+						}finally {
+							close(pstmt);
+						}
 						return Check;
 					}
 

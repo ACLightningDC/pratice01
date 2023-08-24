@@ -9,6 +9,7 @@ public class MemberBean {
 	private String name;
 	private String email;
 	private String phone;
+	private String temporary_password;
 	
 	//'회원가입 폼'에 없음
 	private String joindate;
@@ -88,6 +89,14 @@ public class MemberBean {
 
 	public void setJoindate(String joindate) {
 		this.joindate = joindate;
+	}
+
+	public String getTemporary_password() {
+		return temporary_password;
+	}
+
+	public void setTemporary_password(String temporary_password) {
+		this.temporary_password = temporary_password;
 	}
 	
 	

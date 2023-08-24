@@ -10,7 +10,7 @@ import vo.MemberBean;
 
 public class UserHashPwFindService {
 
-	public MemberBean userHashPwFind(String id, String email) {
+	public int userHashPwFind(String random_Password, String id, String email) {
 		
 		Connection con = getConnection();
 		
@@ -20,13 +20,12 @@ public class UserHashPwFindService {
 		
 		
 		
-		String random_Password = SHA256.getRandomPassword(8);
 		
 		int random_PasswordCheck = userDAO.UserRandomPasswordUpdate(random_Password , id , email);
 		
 		
 		
-		return null;
+		return random_PasswordCheck;
 	}
 
 }
