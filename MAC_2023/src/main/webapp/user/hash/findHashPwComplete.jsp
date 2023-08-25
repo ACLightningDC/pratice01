@@ -11,6 +11,6 @@
 	<a href="userLogin.usr">[로그인]</a><!-- 다시 '로그인 폼 보기'요청 -->
 	
 	<!-- 로그인 후 '암호화된 비밀번호 변경'하도록 수정함  -->
-	<a href="userHashPwChangeForm.usr?u_id=${u_id}">[암호화된 비밀번호 변경]</a>
+	<a href="userHashPwChangeForm.usr">[암호화된 비밀번호 변경]</a>
 </body>
 </html>

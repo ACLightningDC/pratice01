@@ -10,15 +10,19 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import svc.user.DeleteService;
 import svc.user.UserHashPwChangeService;
+import util.SHA256;
 import vo.ActionForward;
 
 public class UserHashPwChangeAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward  = null ;
 		
-		String temporary_password = request.getParameter("temporary_password");
-		String password = request.getParameter("password");
+		String temporary_password = SHA256.encodeSHA256(request.getParameter("pre_password"));
+		String password = SHA256.encodeSHA256(request.getParameter("new_password"));
 		
+		
+		System.out.println("발급된 임시 비밀번호"+ temporary_password);
+		System.out.println("비밀번호"+ password);
 		
 		HttpSession session =  request.getSession();
 		String id = (String) session.getAttribute("u_id");
@@ -28,7 +32,7 @@ public class UserHashPwChangeAction implements Action{
 		int ChangeCheck = userHashPwChangeService.PwChange(id ,temporary_password , password);
 		
 		
-		if(ChangeCheck > 0 ) {
+		if(!(ChangeCheck > 0 )) {
 			response.setContentType("text/html;charset=UTF-8");
 			
 			PrintWriter out = response.getWriter();
@@ -48,6 +52,8 @@ public class UserHashPwChangeAction implements Action{
 			out.println("location.href='userMain.usr';");//out.println("location.href='userMain')
 			out.println("</script>");
 			
+			//방법-2
+			forward = new ActionForward("userMain.usr",true);
 		}
 		
 		return forward;

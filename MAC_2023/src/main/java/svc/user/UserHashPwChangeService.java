@@ -1,6 +1,8 @@
 package svc.user;
 
+import static db.JdbcUtil.commit;
 import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 
@@ -19,6 +21,12 @@ public class UserHashPwChangeService {
 		userDAO.setConnection(con);
 		
 		PwChangeCheck = userDAO.UserHashPwChange(id  , temporary_password , password);
+		
+		if(PwChangeCheck > 0 ) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
 		
 		return PwChangeCheck;
 	}

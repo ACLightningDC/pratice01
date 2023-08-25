@@ -79,10 +79,8 @@ public class UserLoginAction implements Action {
 				
 				session.setMaxInactiveInterval(1*60*60);//세션 유지시간을 1시간(=3600초 )으로 설정
 				
-			if(!userInfo.getTemporary_password().equalsIgnoreCase("NO")) {
-					forward = new ActionForward("userHashPwChangeForm.jsp",true);
-			}	
-			else forward = new ActionForward("userMain.jsp",true);
+
+			forward = new ActionForward("userMain.jsp",true);
 			}
 			
 		

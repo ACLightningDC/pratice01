@@ -88,6 +88,7 @@ if(cookies !=null&& cookies.length > 0){
 				<a href="userIdFindForm.usr">[아이디 찾기]</a>
 				<a href="userPwFindForm.usr">[비밀번호 찾기]</a>
 				<a href="userHashPwFindForm.usr">[암호화된 비밀번호 찾기]</a>
+				
 				</th>
 			</tr>
 

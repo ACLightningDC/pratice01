@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import svc.user.UserHashPwFindService;
@@ -34,9 +35,9 @@ public class userHashPwFindAction implements Action {
 		String email = request.getParameter("email");
 		
 		String random_Password = SHA256.getRandomPassword(8);
-
+		String random_PasswordEncode = SHA256.encodeSHA256(random_Password);
 		UserHashPwFindService userHashPwFindService = new UserHashPwFindService();
-		int Check = userHashPwFindService.userHashPwFind(random_Password , id , email);
+		int Check = userHashPwFindService.userHashPwFind(random_PasswordEncode , id , email);
 		
 		if(Check > 0) {
 			
@@ -92,10 +93,19 @@ public class userHashPwFindAction implements Action {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		
+			request.setAttribute("Password", random_PasswordEncode);
+		request.setAttribute("showPage", "user/hash/findHashPwComplete.jsp");
+		forward = new ActionForward("userTemplate.jsp",false);
+		
+		}else {
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('임시 비밀번호 발급에 문제가 발생했습니다.');");
+			out.println("history.back()");
+			out.println("</script>");
 		}
 		
-		request.setAttribute("showPage", "user/findHashPwComplete.jsp");
-		forward = new ActionForward("userTemplate.jsp",false);
 		return forward;
 	}
 

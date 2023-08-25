@@ -87,8 +87,8 @@
 					</td>
 					<td>
 					<div>
-					<input name= "postcode" id= "postcode" type="text" placeholder="우편번호만입력" c/></div>
-					<input name= "postcode"  type="button" value="우편번호 찾기" onclick="findAddr()" value="${addr.postcode}"/>
+					<input name= "postcode" id= "postcode" type="text" placeholder="우편번호만입력" value="${addr.postcode}" /></div>
+					<input name= "postcode"  type="button" value="우편번호 찾기" onclick="findAddr()" "/>
 					</td>
 				<tr>
 					<td>
@@ -107,6 +107,7 @@
 			
 			<!-- [방법-1] id를 session에서 u_id로 회원찾아 제거 -->
 			<a href="userDelete.usr">회원탈퇴</a>
+			<a href="userHashPwChangeForm.usr">[암호화된 비밀번호 변경]</a>
 </form>
 	
 </body>

@@ -305,7 +305,7 @@ public class UserDAO {
 										memberinfo.setPassword(rs.getString("password"));
 										memberinfo.setName(rs.getString("name"));
 										memberinfo.setEmail(rs.getString("email"));
-										memberinfo.setPhone(rs.getString("email"));
+										memberinfo.setPhone(rs.getString("Phone"));
 										memberinfo.setJoindate(rs.getString("joindate"));										
 									}
 									System.out.println(memberinfo.toString());
@@ -497,12 +497,14 @@ public class UserDAO {
 					public int UserRandomPasswordUpdate(String random_Password, String id, String email) {
 						int Check= 0;
 						
-						String sql ="update member_table password = ? temporary_password = ? where id = ? and email = ?";
+						String sql ="update member_table set password = ? ,temporary_password = ? where id = ? and email = ?";
 						try {
 							pstmt= con.prepareStatement(sql);
 							
+							String temporary_password ="YES";
+							
 							pstmt.setString(1, random_Password);
-							pstmt.setString(2, "YES");
+							pstmt.setString(2, temporary_password);
 							pstmt.setString(3, id);
 							pstmt.setString(4, email);
 							Check = pstmt.executeUpdate();
@@ -518,23 +520,57 @@ public class UserDAO {
 					public int UserHashPwChange(String id , String temporary_password ,String password) {
 int Check= 0;
 						
-						String sql ="update member_table password = ? temporary_password = ? where id = ? and password = ?";
+						String sql ="update member_table set password = ? where id = ? and password = ?";
 						try {
 							pstmt= con.prepareStatement(sql);
 							
 							pstmt.setString(1, password);
-							pstmt.setString(2, "NO");
-							pstmt.setString(3, id);
+							pstmt.setString(2, id);
 							pstmt.setString(3, temporary_password);
 
 							Check = pstmt.executeUpdate();
 							
 						}catch(Exception e) {
-							System.out.println("UserRandomPasswordUpdate 에러 "+e);
+							System.out.println("UserHashPwChange 에러 "+e);
 						}finally {
 							close(pstmt);
 						}
 						return Check;
 					}
+					
+//					public MemberBean findHashPw(String u_id , String u_email) {
+//						MemberBean userInfo = null;
+//						String sql  ="select * from member_table where id=? and email=?";
+//						
+//						try {
+//							pstmt = con.prepareStatement(sql);
+//							pstmt.setString(1 , u_id);
+//							pstmt.setString(1 , u_email);
+//							rs = pstmt.executeQuery();
+//							
+//								if(rs.next()) {
+//									userInfo = new MemberBean();
+//									userInfo.setId(u_id);
+//									userInfo.setEmail(u_email);
+//									userInfo.setName(rs.getString("name"));
+//								}
+//							}catch(Exception e) {
+//								System.out.println("findHashPw 에러" + e);
+//							}finally {
+//								close(pstmt);
+//								close(rs);
+//							}
+//						}
 
-}
+					public int setHashPW(String u_id, String u_email, String random_password) {
+						int setHashPwCount = 0;
+						
+						String sql = "update member_table SET password=? where id=? and email=?";
+						
+						
+						
+					}
+					
+					}
+	
+

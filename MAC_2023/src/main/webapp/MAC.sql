@@ -1,5 +1,5 @@
 /*사용자와 관리자 정보*/
-drop table member_table
+drop table member_table;
 create table member_table(
 id varchar(45) primary key,
 grade Nvarchar(10) not null,
@@ -47,3 +47,7 @@ select * from member_table;
 update member_table set name= ? email= ? phone= ? where id = ? ;
 update address_table set postcode = ? address1 = ? address2=? where id = ?
 delete from member_table where id =?
+
+update member_table set password = ? ,temporary_password = ? where id = ? and email = ?
+delete from member_table where id =?
+delete from member_table where id = '12345678';
