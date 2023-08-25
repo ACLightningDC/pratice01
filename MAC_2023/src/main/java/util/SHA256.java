@@ -50,7 +50,7 @@ public class SHA256 {
 				//(saltPasswordDigest[i]&0xFF)+0x100
 				//str += Integer.toString((saltPasswordDigest[i]&0xFF)+256,16).substring(1);
 				
-				sb.append(Integer.toString((saltPasswordDigest[i]&0xFF)+0x100,16).substring(1));
+				//sb.append(Integer.toString((saltPasswordDigest[i]&0xFF)+0x100,16).substring(1));
 				sb.append(Integer.toString((saltPasswordDigest[i]&0xFF)+256,16).substring(1));
 			}
 			

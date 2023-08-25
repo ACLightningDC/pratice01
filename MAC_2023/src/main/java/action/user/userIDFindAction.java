@@ -36,7 +36,7 @@ public class userIDFindAction implements Action {
 			String u_id = userInfo.getId();
 			request.setAttribute("u_id", u_id);
 			
-			request.setAttribute("showPage", "user/findIdComplete.jsp");
+			request.setAttribute("forward", "findIdComplete.jsp");
 			forward = new ActionForward("userTemplate.jsp",false);
 			
 		}
