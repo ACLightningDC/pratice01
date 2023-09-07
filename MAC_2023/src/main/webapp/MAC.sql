@@ -1,5 +1,6 @@
 /*사용자와 관리자 정보*/
 drop table member_table;
+
 create table member_table(
 id varchar(45) primary key,
 grade Nvarchar(10) not null,
@@ -35,6 +36,46 @@ insert into grade_table values('GOLD',5); /*지난달 구매금액이 50,000 이
 insert into grade_table values('VIP',10); /*10% 100,000이상이면 discount*/
 
 insert into grade_table values('ADMIN',0);
+
+/*3. 메뉴 정보 */
+create table menu_table(
+m_id Nvarchar(20) primary key,
+category Nvarchar(50) not null,
+m_name Nvarchar(45) not null,
+m_price int not null,
+m_detail Nvarchar(200),/*메뉴 설명*/
+m_status varchar (1) not null,/*y: 판매가능, n: 판매불가*/
+m_date date,/* 관리자가 메뉴 올린 날짜*/
+image Nvarchar(100) not null
+);
+
+/*4. 주문 번호*/
+drop table order_table;
+create table order_table(
+order_num int Auto_Increment primary key,/*주문번호*/
+id varchar(45) not null,/*주문한 사용자의 id*/
+email varchar(45) not null,/*회원 탈티 후 주문자를 구분하기 위해 추가함(처음부터 회원번호를 PK 로 했으면 제외시킴*/
+
+order_date timestamp not null,/*주문한 날짜*/
+order_status varchar(10) not null,/*사용자 모드 : 구매하기(order) , 관리자 모드 : 주문 승인(get) 주문취소(cancel)*/
+totalmoney int not null/*주문한 총금액*/
+);
+
+/*5. 주문 상세 정보*/
+
+
+
+/*6. 리뷰 정보*/
+drop table review_table;
+create table review_table(
+review_num int auto_increment primary key,/*리뷰번호*/
+u_id varchar(45) not null,/*리뷰 단 사용자 id*/
+m_id Nvarchar(30) not null,/*메뉴id*/
+rating int not null,/*평점*/
+text Nvarchar(200)/*한줊평 적기는 null 허용*/
+);
+
+select * from menu_table;
 
 select * from member_table where (id = ? ) and (password = ?)
 

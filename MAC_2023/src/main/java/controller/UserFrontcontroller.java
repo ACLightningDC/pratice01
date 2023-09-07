@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.admin.MenuManageAction;
 import action.user.UpdateAction;
 import action.user.UserDeleteAction;
 import action.user.UserLoginAction;
@@ -210,7 +211,20 @@ public class UserFrontcontroller extends HttpServlet {
 				
 			}
 		}
-	
+		
+		//***********************************************************************
+		else if(command.equals("/MenuManageAction.usr")) {//비밀번호 찾기 폼 요청하면 
+			//부모 인터페이스 = 구현한 자식 객체
+			System.out.println("실행");
+			action = new MenuManageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+		
 		
 		
 		
