@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+*{
+	box-sizing : border-box;
+	margin : 0;  /* 바깥쪽 여백 0 */
+	padding : 0; /* 안쪽 여백 0 */
+}
+
+header{
+	height : 80px;
+	line-height : 80px;
+	text-align : center;
+	background-color : #800080; /* RGB */
+	color : #ffffff; /* white */
+}
+
+nav{
+	height : 30px;
+	line-height : 30px;
+	background-color : #400040;
+}
+
+nav a{
+	text-decoration : none; /* 하이퍼링크 밑줄 없애기 */
+	color : #ffffff; /* white */
+	margin-left : 30px;
+}
+
+td a{
+	text-decoration : none; /* 하이퍼링크 밑줄 없애기 */
+	color : #808080;	
+}
+
+section {	
+	padding : 20px;	
+	overflow : auto; /* 스크롤바 자동 생성 */
+}
+
+section div {
+	text-align : center;
+	margin : 20px;
+}	
+
+section ol{
+	margin-left : 30px;
+}
+
+table {
+	margin:0 auto;
+	border-collapse: collapse;
+}
+
+footer{ 
+	position: absolute; bottom: 0; /*footer 바닥에 고정*/
+	width : 100%;/* 이 부분 없으면 길이가 짧게 나옴 */
+	
+	height : 40px;
+	line-height : 40px;
+	text-align : center;
+	background-color : #800080; /* RGB */
+	color : #ffffff; /* white */
+}
